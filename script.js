@@ -278,11 +278,60 @@ function updateScoreboardUI() {
     list.innerHTML = '';
     // 排序：分數高到低
     const sorted = Object.entries(scoreboard).sort((a, b) => b[1] - a[1]);
-    sorted.forEach(([name, score]) => {
+    sorted.forEach(([name, score], idx) => {
         const li = document.createElement('li');
         li.innerHTML = `<span>${name}</span><span>${score} 分</span>`;
         list.appendChild(li);
     });
+    // 處理按鈕區
+    const scoreboardDiv = document.getElementById('scoreboard');
+    let btnRow = document.getElementById('scoreBtnRow');
+    if (!btnRow) {
+        btnRow = document.createElement('div');
+        btnRow.id = 'scoreBtnRow';
+        btnRow.style.display = 'flex';
+        btnRow.style.gap = '12px';
+        btnRow.style.marginTop = '10px';
+        scoreboardDiv.appendChild(btnRow);
+    }
+    btnRow.innerHTML = '';
+    // 輸家懲罰按鈕（只在有最後一名時顯示）
+    if (sorted.length > 0) {
+        let punishBtn = document.getElementById('scorePunishBtn');
+        if (!punishBtn) {
+            punishBtn = document.createElement('button');
+            punishBtn.id = 'scorePunishBtn';
+            punishBtn.textContent = '輸家懲罰';
+            punishBtn.className = 'punish-btn';
+            punishBtn.onclick = function() {
+                const punishments = [
+                  "現場大聲說一句「我是最可愛的！」",
+                  "用動物叫聲模仿10秒鐘",
+                  "請大家給你一個奇怪的綽號，並用這個綽號自我介紹一次",
+                  "用手機自拍一張鬼臉照，傳給群組",
+                  "現場跳一小段即興舞蹈",
+                  "請對方指定一個人，互相誇獎對方三句",
+                  "用台語/方言說一句情話",
+                  "用手比出一個最帥/最美的POSE，讓大家拍照",
+                  "模仿現場任一位玩家的說話或動作10秒",
+                  "請大家一起幫你想一個「今日金句」，你要大聲唸出來"
+                ];
+                const idx = Math.floor(Math.random() * punishments.length);
+                const modal = document.getElementById('punishModal');
+                const list = document.getElementById('punishList');
+                list.innerHTML = `<li style='font-size:1.2em;padding:18px 0;text-align:center;'>${punishments[idx]}</li>`;
+                modal.style.display = '';
+            };
+        }
+        btnRow.appendChild(punishBtn);
+    }
+    // 重置分數按鈕
+    if (resetBtn) {
+        resetBtn.style.marginTop = '12px';
+        btnRow.appendChild(resetBtn);
+    }
+    btnRow.style.flexDirection = 'column';
+    btnRow.style.alignItems = 'stretch';
 }
 
 function updateGiverUI() {
@@ -540,4 +589,32 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('switchRoleBtn').style.display = 'none';
     };
     updateScoreboardUI();
-}); 
+});
+
+// CSS for punish-btn
+const style = document.createElement('style');
+style.innerHTML = `
+.punish-btn {
+  margin-top: 8px;
+  background: #ff9800;
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  padding: 7px 18px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px #ffd180;
+}
+.punish-btn:hover {
+  background: #ffa726;
+}`;
+document.head.appendChild(style);
+
+// 懲罰彈窗 close 按鈕功能補強
+if (document.getElementById('closePunishModal')) {
+  document.getElementById('closePunishModal').onclick = function() {
+    document.getElementById('punishModal').style.display = 'none';
+  };
+} 

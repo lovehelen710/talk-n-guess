@@ -22,7 +22,7 @@
             font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
         }
         .container {
-            max-width: 900px;
+            max-width: 1100px;
             margin: 0 auto;
             min-height: 100vh;
             display: flex;
@@ -127,9 +127,10 @@
             background: var(--card-bg);
             border-radius: 15px;
             box-shadow: var(--shadow);
-            padding: 36px 20px 32px 20px;
+            padding: 36px 32px 32px 32px;
             margin-top: 32px;
             animation: fadeIn 0.7s;
+            max-width: 1000px;
         }
         .main-title {
             font-size: 1.5em;
@@ -167,13 +168,17 @@
         }
         .guesser-flex3 {
             display: flex;
-            gap: 24px;
+            gap: 36px;
             align-items: flex-start;
-            justify-content: space-between;
+            justify-content: flex-start;
         }
         .guesser-col {
             flex: 1 1 0;
             min-width: 0;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: none;
+            padding: 0 2px;
         }
         .hint-list-title, .used-list-title, .scoreboard-title {
             font-size: 1.1em;
@@ -183,10 +188,12 @@
         }
         .hint-btns-col {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: 10px;
             margin-bottom: 10px;
             justify-content: flex-start;
+            align-items: flex-start;
+            width: 100%;
         }
         .used-list {
             display: flex;
@@ -215,6 +222,12 @@
             font-weight: bold;
             box-shadow: 0 2px 8px rgba(255,152,0,0.08);
             white-space: nowrap;
+            min-width: 120px;
+            width: auto;
+            max-width: none;
+            box-sizing: border-box;
+            text-align: center;
+            display: block;
         }
         .button:hover {
             background: #fb8c00;
@@ -231,8 +244,10 @@
             box-shadow: 0 2px 8px rgba(255,152,0,0.08);
             padding: 18px 12px 12px 12px;
             width: 100%;
-            max-width: 220px;
-            min-width: 120px;
+            max-width: 200px;
+            min-width: 140px;
+            margin: 0 32px 0 24px;
+            padding-right: 0;
         }
         .scoreboard-list {
             list-style: none;
@@ -332,6 +347,14 @@
             80% { transform: scale(1.08); }
             100% { transform: scale(1); opacity: 1; }
         }
+        /* 記分板分數顏色（3分紫色） */
+        .pyramid-layer:nth-child(3) {
+            background: #7E57C2 !important;
+        }
+        .pyramid-layer:nth-child(3) .layer-score {
+            background: #7E57C2 !important;
+            color: #fff !important;
+        }
     </style>
 </head>
 <body>
@@ -401,7 +424,8 @@
         </div>
         <div id="giverSection" class="main-section" style="display:none;">
             <div class="main-title">提示者</div>
-            <div class="main-card" id="giverTopic">—</div>
+            <div class="main-card" id="giverTopic" style="font-size:2.1em;text-align:center;margin-bottom:8px;">—</div>
+            <div style="text-align:center;font-size:0.98em;color:#888;margin-bottom:18px;">（請勿讓猜題者看到題目！）</div>
             <button class="button" id="drawTopicBtn">抽主題</button>
         </div>
         <div id="modalBg" class="modal-bg" style="display:none;">
@@ -440,6 +464,13 @@
                 </div>
             </div>
         </div>
+        <div id="punishModal" class="modal-bg" style="display:none;">
+          <div class="modal">
+            <button class="modal-close" id="closePunishModal">✕</button>
+            <h2>懲罰時間！</h2>
+            <ul id="punishList" style="padding-left:18px;"></ul>
+          </div>
+        </div>
         <footer>
             作者：Helen<br>
             <!-- email: <a href="mailto:"></a> -->
@@ -447,5 +478,27 @@
         </footer>
     </div>
     <script src="script.js"></script>
+    <script>
+    const punishments = [
+      "現場大聲說一句「我是最可愛的！」",
+      "用動物叫聲模仿10秒鐘",
+      "請大家給你一個奇怪的綽號，並用這個綽號自我介紹一次",
+      "用手機自拍一張鬼臉照，傳給群組",
+      "現場跳一小段即興舞蹈",
+      "請對方指定一個人，互相誇獎對方三句",
+      "用台語/方言說一句情話",
+      "用手比出一個最帥/最美的POSE，讓大家拍照",
+      "模仿現場任一位玩家的說話或動作10秒",
+      "請大家一起幫你想一個「今日金句」，你要大聲唸出來"
+    ];
+    document.getElementById('punishBtn').onclick = function() {
+      const list = document.getElementById('punishList');
+      list.innerHTML = punishments.map(p => `<li>${p}</li>`).join('');
+      document.getElementById('punishModal').style.display = '';
+    };
+    document.getElementById('closePunishModal').onclick = function() {
+      document.getElementById('punishModal').style.display = 'none';
+    };
+    </script>
 </body>
 </html> 
