@@ -78,21 +78,33 @@
             padding: 40px 20px 32px 20px;
             animation: fadeIn 0.7s;
         }
+        .role-btns-row {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+        }
         .role-btn {
-            padding: 16px 36px;
-            font-size: 1.3em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 24px 32px;
+            font-size: 1.15em;
             border: none;
-            border-radius: 25px;
-            margin: 18px 18px 0 18px;
-            background: var(--main-orange);
+            border-radius: 22px;
+            background: #ff9800;
             color: #fff;
-            cursor: pointer;
-            transition: all 0.2s;
             font-weight: bold;
-            box-shadow: 0 2px 8px rgba(255,152,0,0.08);
+            cursor: pointer;
+            box-shadow: 0 2px 8px #ffd180;
+            transition: background 0.2s, transform 0.1s;
         }
         .role-btn:hover {
-            background: #fb8c00;
+            background: #ffa726;
+            transform: scale(1.05);
+        }
+        .role-btn svg {
+            margin-bottom: 10px;
+            display: block;
         }
         .switch-role-btn {
             position: absolute;
@@ -333,14 +345,39 @@
         </header>
         <div id="roleSelect" class="role-select">
             <div style="font-size:1.3em;font-weight:bold;margin-bottom:18px;">請選擇你的角色</div>
-            <button class="role-btn" id="roleGuesser">我是猜題者</button>
-            <button class="role-btn" id="roleGiver">我是提示者</button>
+            <div class="role-btns-row">
+                <button class="role-btn" id="roleGuesser">
+                  <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+                    <circle cx="32" cy="32" r="24" fill="#FFD966" stroke="#FF9800" stroke-width="3"/>
+                    <ellipse cx="32" cy="36" rx="12" ry="10" fill="#fff"/>
+                    <ellipse cx="28" cy="34" rx="2" ry="3" fill="#333"/>
+                    <ellipse cx="36" cy="34" rx="2" ry="3" fill="#333"/>
+                    <path d="M28 40 Q32 44 36 40" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    <circle cx="54" cy="54" r="10" fill="#90CAF9" stroke="#1976D2" stroke-width="3"/>
+                    <rect x="60" y="60" width="8" height="3" rx="1.5" fill="#1976D2" transform="rotate(45 60 60)"/>
+                  </svg>
+                  <div>我是猜題者</div>
+                </button>
+                <button class="role-btn" id="roleGiver">
+                  <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+                    <circle cx="36" cy="36" r="24" fill="#B39DDB" stroke="#7E57C2" stroke-width="3"/>
+                    <ellipse cx="36" cy="40" rx="12" ry="10" fill="#fff"/>
+                    <ellipse cx="32" cy="38" rx="2" ry="3" fill="#333"/>
+                    <ellipse cx="40" cy="38" rx="2" ry="3" fill="#333"/>
+                    <path d="M32 44 Q36 48 40 44" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    <ellipse cx="60" cy="24" rx="8" ry="6" fill="#fff" stroke="#7E57C2" stroke-width="2"/>
+                    <text x="56" y="28" font-size="10" fill="#7E57C2" font-family="Arial">...</text>
+                  </svg>
+                  <div>我是提示者</div>
+                </button>
+            </div>
         </div>
         <div id="guesserSection" class="main-section" style="display:none;">
             <div class="main-title">猜題者</div>
             <div class="score-row">
                 <input class="score-input" id="guesserName" type="text" placeholder="請輸入猜題者姓名" maxlength="12" autocomplete="off">
                 <button class="score-btn" id="scoreBtn">猜對了</button>
+                <button class="score-btn" id="failBtn" style="background:#bdbdbd; color:#fff;">沒猜中</button>
             </div>
             <div class="guesser-flex3">
                 <div class="guesser-col">
@@ -380,6 +417,27 @@
                     <li>可隨時切換角色，體驗不同視角。</li>
                 </ol>
                 <div style="margin-top:10px;font-size:0.98em;color:#888;">本遊戲由 Helen 製作，歡迎自由分享！</div>
+            </div>
+        </div>
+        <div id="customHintModal" class="modal-bg" style="display:none;">
+            <div class="modal">
+                <button class="modal-close" id="closeCustomHintModal">✕</button>
+                <h2>輸入自訂問題</h2>
+                <input id="customHintInput" type="text" maxlength="30" placeholder="請輸入你的自訂問題" style="width:100%;font-size:1.1em;padding:8px 10px;margin:12px 0 18px 0;border-radius:8px;border:1.5px solid #ffe0b2;">
+                <div style="text-align:right;">
+                    <button class="button" id="addCustomHintBtn">加入題庫</button>
+                    <button class="button" id="skipCustomHintBtn" style="background:#bdbdbd;">直接記錄自訂問題</button>
+                </div>
+            </div>
+        </div>
+        <div id="mvpModal" class="modal-bg" style="display:none;">
+            <div class="modal">
+                <button class="modal-close" id="closeMvpModal">✕</button>
+                <h2>選擇本輪 MVP（可選填）</h2>
+                <input id="mvpInput" type="text" maxlength="12" placeholder="請輸入 MVP 姓名" style="width:100%;font-size:1.1em;padding:8px 10px;margin:12px 0 18px 0;border-radius:8px;border:1.5px solid #ffe0b2;">
+                <div style="text-align:right;">
+                    <button class="button" id="confirmMvpBtn">完成</button>
+                </div>
             </div>
         </div>
         <footer>

@@ -70,85 +70,26 @@ const topics = [
 
 // 80 個助攻問題（含 16 個 18禁）
 const hints = [
-    // 一般 64 題
-    { category: "一般", hint: "你第一次是什麼時候？" },
-    { category: "一般", hint: "你最難忘的是哪一次？" },
-    { category: "一般", hint: "你最近一次是什麼時候？" },
-    { category: "一般", hint: "你最尷尬的一次經驗？" },
-    { category: "一般", hint: "你最開心的一次經驗？" },
-    { category: "一般", hint: "你最想再來一次的經驗？" },
-    { category: "一般", hint: "你最不想再來一次的經驗？" },
-    { category: "一般", hint: "你最特別的一次經驗？" },
-    { category: "一般", hint: "你最花錢的一次經驗？" },
-    { category: "一般", hint: "你最省錢的一次經驗？" },
-    { category: "一般", hint: "你最冒險的一次經驗？" },
-    { category: "一般", hint: "你最感動的一次經驗？" },
-    { category: "一般", hint: "你最後悔的一次經驗？" },
-    { category: "一般", hint: "你最驚喜的一次經驗？" },
-    { category: "一般", hint: "你最生氣的一次經驗？" },
-    { category: "一般", hint: "你最害怕的一次經驗？" },
-    { category: "一般", hint: "你最勇敢的一次經驗？" },
-    { category: "一般", hint: "你最丟臉的一次經驗？" },
-    { category: "一般", hint: "你最感謝的一次經驗？" },
-    { category: "一般", hint: "你最想分享的一次經驗？" },
-    { category: "一般", hint: "你最想忘記的一次經驗？" },
-    { category: "一般", hint: "你最想炫耀的一次經驗？" },
-    { category: "一般", hint: "你最想保密的一次經驗？" },
-    { category: "一般", hint: "你最想改變的一次經驗？" },
-    { category: "一般", hint: "你最想重來的一次經驗？" },
-    { category: "一般", hint: "你最想帶朋友一起的經驗？" },
-    { category: "一般", hint: "你最想帶家人一起的經驗？" },
-    { category: "一般", hint: "你最想帶情人一起的經驗？" },
-    { category: "一般", hint: "你最想一個人完成的經驗？" },
-    { category: "一般", hint: "你最想再挑戰一次的經驗？" },
-    { category: "一般", hint: "你最想推薦給別人的經驗？" },
-    { category: "一般", hint: "你最想收藏的經驗？" },
-    { category: "一般", hint: "你最想拍照紀念的經驗？" },
-    { category: "一般", hint: "你最想錄影紀錄的經驗？" },
-    { category: "一般", hint: "你最想寫日記記錄的經驗？" },
-    { category: "一般", hint: "你最想畫畫記錄的經驗？" },
-    { category: "一般", hint: "你最想寫歌記錄的經驗？" },
-    { category: "一般", hint: "你最想寫小說記錄的經驗？" },
-    { category: "一般", hint: "你最想畫漫畫記錄的經驗？" },
-    { category: "一般", hint: "你最想做成影片的經驗？" },
-    { category: "一般", hint: "你最想做成遊戲的經驗？" },
-    { category: "一般", hint: "你最想做成商品的經驗？" },
-    { category: "一般", hint: "你最想做成展覽的經驗？" },
-    { category: "一般", hint: "你最想做成課程的經驗？" },
-    { category: "一般", hint: "你最想做成活動的經驗？" },
-    { category: "一般", hint: "你最想做成比賽的經驗？" },
-    { category: "一般", hint: "你最想做成表演的經驗？" },
-    { category: "一般", hint: "你最想做成故事的經驗？" },
-    { category: "一般", hint: "你最想做成漫畫的經驗？" },
-    { category: "一般", hint: "你最想做成動畫的經驗？" },
-    { category: "一般", hint: "你最想做成電影的經驗？" },
-    { category: "一般", hint: "你最想做成小說的經驗？" },
-    { category: "一般", hint: "你最想做成詩的經驗？" },
-    { category: "一般", hint: "你最想做成繪本的經驗？" },
-    { category: "一般", hint: "你最想做成歌曲的經驗？" },
-    { category: "一般", hint: "你最想做成劇本的經驗？" },
-    { category: "一般", hint: "你最想做成廣告的經驗？" },
-    { category: "一般", hint: "你最想做成新聞的經驗？" },
-    { category: "一般", hint: "你最想做成報導的經驗？" },
-    { category: "一般", hint: "你最想做成專題的經驗？" },
-    { category: "一般", hint: "你最想做成研究的經驗？" },
-    // 18禁 16題
-    { category: "18禁", hint: "你第一次是什麼時候？" },
-    { category: "18禁", hint: "你最激情的是哪一次？" },
-    { category: "18禁", hint: "你最害羞的是哪一次？" },
-    { category: "18禁", hint: "你最刺激的是哪一次？" },
-    { category: "18禁", hint: "你最難忘的是哪一次？" },
-    { category: "18禁", hint: "你最尷尬的是哪一次？" },
-    { category: "18禁", hint: "你最想再來一次的是哪一次？" },
-    { category: "18禁", hint: "你最想保密的是哪一次？" },
-    { category: "18禁", hint: "你最想推薦給朋友的是哪一次？" },
-    { category: "18禁", hint: "你最想忘記的是哪一次？" },
-    { category: "18禁", hint: "你最想炫耀的是哪一次？" },
-    { category: "18禁", hint: "你最想錄影的是哪一次？" },
-    { category: "18禁", hint: "你最想拍照的是哪一次？" },
-    { category: "18禁", hint: "你最想寫日記的是哪一次？" },
-    { category: "18禁", hint: "你最想畫畫的是哪一次？" },
-    { category: "18禁", hint: "你最想寫小說的是哪一次？" }
+    { category: "一般", hint: "第一次體驗是什麼時候？" },
+    { category: "一般", hint: "你大概多久會一次？" },
+    { category: "一般", hint: "最後一次體驗是什麼時候？" },
+    { category: "一般", hint: "體驗次數比你想像多嗎？" },
+    { category: "一般", hint: "到目前為止體驗過幾次？" },
+    { category: "一般", hint: "你和誰一起體驗過？" },
+    { category: "一般", hint: "今年內體驗過幾次？" },
+    { category: "一般", hint: "在哪裡體驗？" },
+    { category: "一般", hint: "在圈內的人中誰最常體驗這個？" },
+    { category: "一般", hint: "大約多少人一起體驗？" },
+    { category: "一般", hint: "可以一個人體驗嗎？" },
+    { category: "一般", hint: "體驗過最特別的場合或狀況？" },
+    { category: "一般", hint: "有體驗過這個的名人或老師嗎？" },
+    { category: "一般", hint: "這個體驗最難的部份是什麼？" },
+    { category: "一般", hint: "去體驗最麻煩的是什麼？" },
+    { category: "一般", hint: "這項體驗需要多久時間？" },
+    { category: "一般", hint: "有多貴？" },
+    { category: "一般", hint: "這個體驗需要多少錢？" },
+    { category: "一般", hint: "這個體驗需要多久準備時間？" },
+    { category: "一般", hint: "這個體驗需要什麼裝備？" }
 ];
 
 const CUSTOM_HINT = '自訂問題';
@@ -158,6 +99,8 @@ let usedHintIndexes = [];
 let usedTopicIndexes = [];
 let currentTopic = null;
 let scoreboard = {}; // { name: 分數 }
+let customHints = [];
+let pendingCustomHint = null; // 暫存自訂問題內容
 
 function getRandomUnusedTopicIndex() {
     if (usedTopicIndexes.length >= topics.length) return null;
@@ -195,12 +138,42 @@ function updateGuesserUI() {
         const customBtn = document.createElement('button');
         customBtn.className = 'button';
         customBtn.textContent = CUSTOM_HINT;
-        customBtn.onclick = () => selectCustomHint(customBtn);
+        customBtn.onclick = () => openCustomHintModal();
         btnsDiv.appendChild(customBtn);
+        // 動態加入所有自訂問題
+        customHints.forEach((hint, idx) => {
+            // 已問過的不再顯示
+            if (hint.used) return;
+            const btnWrap = document.createElement('div');
+            btnWrap.style.display = 'flex';
+            btnWrap.style.alignItems = 'center';
+            btnWrap.style.marginBottom = '8px'; // 換行
+            const btn = document.createElement('button');
+            btn.className = 'button';
+            btn.textContent = hint.text;
+            btn.onclick = () => selectCustomHintInList(idx, btn);
+            btnWrap.appendChild(btn);
+            // 減號按鈕
+            const minusBtn = document.createElement('button');
+            minusBtn.textContent = '－';
+            minusBtn.style.marginLeft = '6px';
+            minusBtn.style.background = '#d32f2f';
+            minusBtn.style.color = '#fff';
+            minusBtn.style.border = 'none';
+            minusBtn.style.borderRadius = '50%';
+            minusBtn.style.width = '22px';
+            minusBtn.style.height = '22px';
+            minusBtn.style.cursor = 'pointer';
+            minusBtn.onclick = function() {
+                customHints.splice(idx, 1);
+                updateGuesserUI();
+            };
+            btnWrap.appendChild(minusBtn);
+            btnsDiv.appendChild(btnWrap);
+        });
         // 其他助攻問題
         hints.forEach((item, idx) => {
             if (item.hint === CUSTOM_HINT) return; // 避免重複
-            // 已問過的不再顯示
             if (usedHintIndexes.includes(idx)) return;
             const btn = document.createElement('button');
             btn.className = 'button';
@@ -212,12 +185,91 @@ function updateGuesserUI() {
     // 已問過的助攻問題
     const usedList = document.getElementById('usedHintsList');
     usedList.innerHTML = '';
-    usedHintIndexes.forEach(idx => {
-        const div = document.createElement('div');
-        div.className = 'used-item';
-        div.textContent = hints[idx].hint;
-        usedList.appendChild(div);
-    });
+    // 金字塔進度條
+    let pyramid = document.getElementById('pyramidCard');
+    if (!pyramid) {
+        pyramid = document.createElement('div');
+        pyramid.id = 'pyramidCard';
+        pyramid.className = 'pyramid-card';
+        usedList.parentNode.insertBefore(pyramid, usedList);
+    }
+    pyramid.innerHTML = '';
+    // 合併已問過的助攻問題（原生+自訂）
+    let askedArr = usedHintIndexes.map(idx => ({ type: 'hint', text: hints[idx].hint, idx }))
+        .concat(customHints.map((h, i) => h.used ? { type: 'custom', text: h.text, idx: i } : null).filter(Boolean));
+    // 5層金字塔
+    for (let i = 0; i < 5; i++) {
+        const layer = document.createElement('div');
+        layer.className = 'pyramid-layer';
+        // 層級顏色
+        const colors = ['#e57373','#ffb74d','#fff176','#81c784','#64b5f6'];
+        layer.style.background = colors[i];
+        layer.style.borderRadius = '18px';
+        layer.style.margin = '6px 0';
+        layer.style.display = 'flex';
+        layer.style.alignItems = 'center';
+        layer.style.minHeight = '38px';
+        layer.style.position = 'relative';
+        // 分數標籤
+        const score = document.createElement('span');
+        score.className = 'layer-score';
+        score.textContent = `${5-i}分`;
+        score.style.fontWeight = 'bold';
+        score.style.margin = '0 10px 0 12px';
+        score.style.color = '#fff';
+        layer.appendChild(score);
+        // 題目內容
+        const content = document.createElement('span');
+        content.className = 'layer-content';
+        content.textContent = askedArr[i] ? askedArr[i].text : '';
+        content.style.flex = '1';
+        content.style.fontSize = '1.08em';
+        content.style.color = '#333';
+        layer.appendChild(content);
+        // 減號按鈕
+        if (askedArr[i]) {
+            const minusBtn = document.createElement('button');
+            minusBtn.textContent = '－';
+            minusBtn.style.marginLeft = '8px';
+            minusBtn.style.background = '#d32f2f';
+            minusBtn.style.color = '#fff';
+            minusBtn.style.border = 'none';
+            minusBtn.style.borderRadius = '50%';
+            minusBtn.style.width = '22px';
+            minusBtn.style.height = '22px';
+            minusBtn.style.cursor = 'pointer';
+            minusBtn.onclick = function() {
+                if (askedArr[i].type === 'hint') {
+                    usedHintIndexes = usedHintIndexes.filter(idx => idx !== askedArr[i].idx);
+                } else if (askedArr[i].type === 'custom') {
+                    customHints[askedArr[i].idx].used = false;
+                }
+                updateGuesserUI();
+            };
+            layer.appendChild(minusBtn);
+        }
+        pyramid.appendChild(layer);
+    }
+    // 圓點標示目前進度
+    let marker = document.getElementById('pyramidMarker');
+    if (!marker) {
+        marker = document.createElement('div');
+        marker.id = 'pyramidMarker';
+        marker.className = 'pyramid-marker';
+        pyramid.appendChild(marker);
+    }
+    // 位置：已問幾題就到第N層（0題在最上，5題在最下）
+    marker.style.position = 'absolute';
+    marker.style.left = '-30px';
+    marker.style.width = '28px';
+    marker.style.height = '28px';
+    marker.style.background = '#a259e6';
+    marker.style.borderRadius = '50%';
+    marker.style.top = (askedArr.length * 44) + 'px'; // 每層約44px
+    marker.style.boxShadow = '0 2px 8px #888';
+    marker.style.display = 'block';
+    marker.style.transition = 'top 0.3s';
+    marker.style.zIndex = 2;
     updateScoreboardUI();
 }
 
@@ -256,13 +308,37 @@ function selectHint(idx, btn) {
     }
 }
 
-function selectCustomHint(btn) {
-    showToast('請口頭說出自訂問題！');
-    if (btn) {
-        btn.classList.add('animated');
-        setTimeout(() => btn.classList.remove('animated'), 400);
+function openCustomHintModal() {
+    document.getElementById('customHintInput').value = '';
+    document.getElementById('customHintModal').style.display = '';
+    pendingCustomHint = null;
+}
+function closeCustomHintModal() {
+    document.getElementById('customHintModal').style.display = 'none';
+}
+function addCustomHint() {
+    const val = document.getElementById('customHintInput').value.trim();
+    // 只加入 customHints，used: false，待選清單可重複被選
+    if (val) {
+        customHints.push({ text: val, used: false });
+        closeCustomHintModal();
+        updateGuesserUI();
+        showToast('自訂問題已加入題庫');
+    } else {
+        closeCustomHintModal();
+        showToast('請輸入自訂問題內容', true);
     }
-    // 不會被移到已問過區塊，可重複點選
+}
+function selectCustomHintInList(idx, btn) {
+    if (!customHints[idx].used && (usedHintIndexes.length + customHints.filter(h => h.used).length) < 5) {
+        customHints[idx].used = true;
+        updateGuesserUI();
+        if (btn) {
+            btn.classList.add('animated');
+            setTimeout(() => btn.classList.remove('animated'), 400);
+        }
+        showToast('已選擇自訂問題');
+    }
 }
 
 function drawTopic() {
@@ -291,8 +367,8 @@ function scoreThisRound() {
         nameInput.focus();
         return;
     }
-    // 計算本輪有效題數（不含自訂問題）
-    let validCount = usedHintIndexes.length;
+    // 計算本輪有效題數（含所有已問過的題目）
+    let validCount = usedHintIndexes.length + customHints.filter(h => h.used).length;
     if (validCount === 0) {
         showToast('請至少問一題再計分', true);
         return;
@@ -301,9 +377,28 @@ function scoreThisRound() {
     if (score < 1) score = 1;
     if (!scoreboard[name]) scoreboard[name] = 0;
     scoreboard[name] += score;
-    showToast(`${name} 本輪獲得 ${score} 分！`);
+    // 彈出 MVP 輸入框
+    openMvpModal(() => {
+        showToast(`${name} 本輪獲得 ${score} 分！`);
+        updateScoreboardUI();
+        setTimeout(() => {
+            resetGuesser();
+            nameInput.value = '';
+        }, 800);
+    });
+}
+
+function failThisRound() {
+    const nameInput = document.getElementById('guesserName');
+    const name = nameInput.value.trim();
+    if (!name) {
+        showToast('請輸入猜題者姓名', true);
+        nameInput.focus();
+        return;
+    }
+    if (!scoreboard[name]) scoreboard[name] = 0;
+    showToast(`${name} 本輪獲得 0 分`);
     updateScoreboardUI();
-    // 自動重置本輪
     setTimeout(() => {
         resetGuesser();
         nameInput.value = '';
@@ -316,9 +411,48 @@ function resetScoreboard() {
     showToast('分數已重置');
 }
 
+function openMvpModal(onConfirm) {
+    document.getElementById('mvpInput').value = '';
+    document.getElementById('mvpModal').style.display = '';
+    document.getElementById('confirmMvpBtn').onclick = function() {
+        const mvp = document.getElementById('mvpInput').value.trim();
+        if (mvp) {
+            if (!scoreboard[mvp]) scoreboard[mvp] = 0;
+            scoreboard[mvp] += 1;
+            showToast(`MVP ${mvp} +1分`);
+        }
+        closeMvpModal();
+        if (onConfirm) onConfirm();
+    };
+    document.getElementById('closeMvpModal').onclick = function() {
+        closeMvpModal();
+        if (onConfirm) onConfirm();
+    };
+    document.getElementById('mvpModal').onclick = function(e) {
+        if (e.target === this) {
+            closeMvpModal();
+            if (onConfirm) onConfirm();
+        }
+    };
+}
+function closeMvpModal() {
+    document.getElementById('mvpModal').style.display = 'none';
+}
+
 // 玩法說明彈窗
 function showModal() {
     document.getElementById('modalBg').style.display = '';
+    document.querySelector('#modalBg .modal ol').innerHTML = `
+        <li>👥 選擇你的角色：你想當「猜題者」還是「提示者」呢？</li>
+        <li>🎲 提示者按「抽主題」獲得神祕題目，千萬別讓猜題者偷看唷！</li>
+        <li>💡 猜題者可以從各種助攻問題中自由選擇，問提示者來獲得線索。</li>
+        <li>❓ 想不到要問什麼？也可以自己輸入自訂問題，讓遊戲更有趣！</li>
+        <li>⏳ 每輪最多只能問5題，問完記得按「重新開始」開啟新一輪冒險。</li>
+        <li>🏆 猜對了就輸入你的名字並按「猜對了」，系統會自動幫你加分！</li>
+        <li>🔄 隨時可以切換角色，體驗不同的遊戲視角。</li>
+        <li>📝 題目太難？助攻問題太爆笑？都可以用減號刪除，讓遊戲更順暢！</li>
+    `;
+    document.querySelector('#modalBg .modal div[style*="color:#888"]').textContent = '快揪朋友一起來侃侃而猜，看看誰最會問、誰最會猜！';
 }
 function hideModal() {
     document.getElementById('modalBg').style.display = 'none';
@@ -350,6 +484,19 @@ function showToast(msg, isError) {
     setTimeout(() => { toast.style.opacity = 0; }, 1800);
 }
 
+function skipCustomHint() {
+    // 直接記錄一題「自訂問題」到已問過
+    if ((usedHintIndexes.length + customHints.filter(h => h.used).length) < 5) {
+        customHints.push({ text: CUSTOM_HINT, used: true });
+        closeCustomHintModal();
+        updateGuesserUI();
+        showToast('已記錄自訂問題');
+    } else {
+        closeCustomHintModal();
+        showToast('已達 5 題，請重新開始！', true);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // 角色選擇
     document.getElementById('roleGuesser').onclick = () => switchRole('guesser');
@@ -364,6 +511,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('resetGuesserBtn').onclick = resetGuesser;
     // 猜對了計分
     document.getElementById('scoreBtn').onclick = scoreThisRound;
+    // 猜錯了計分
+    document.getElementById('failBtn').onclick = failThisRound;
     // 重置分數
     document.getElementById('resetScoreBtn').onclick = resetScoreboard;
     // 玩法說明彈窗
@@ -377,5 +526,18 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('guesserSection').style.display = 'none';
     document.getElementById('giverSection').style.display = 'none';
     document.getElementById('switchRoleBtn').style.display = 'none';
+    document.getElementById('addCustomHintBtn').onclick = addCustomHint;
+    document.getElementById('closeCustomHintModal').onclick = closeCustomHintModal;
+    document.getElementById('customHintModal').onclick = function(e) {
+        if (e.target === this) closeCustomHintModal();
+    };
+    document.getElementById('skipCustomHintBtn').onclick = skipCustomHint;
+    document.querySelector('.logo').onclick = function() {
+        // 回到角色選擇頁
+        document.getElementById('roleSelect').style.display = '';
+        document.getElementById('guesserSection').style.display = 'none';
+        document.getElementById('giverSection').style.display = 'none';
+        document.getElementById('switchRoleBtn').style.display = 'none';
+    };
     updateScoreboardUI();
 }); 
