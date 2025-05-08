@@ -3,29 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>侃侃而猜</title>
+    <title>侃侃而猜 Talk n Guess</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Microsoft JhengHei', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
+        :root {
+            --main-orange: #ff9800;
+            --main-blue: #1a237e;
+            --main-bg: #f7f8fa;
+            --card-bg: #fff;
+            --shadow: 0 4px 16px rgba(26,35,126,0.08);
+        }
+        html, body {
+            background: var(--main-bg);
             margin: 0;
-            padding: 20px;
-            background-color: #f0f2f5;
+            padding: 0;
+            font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
         }
         .container {
-            max-width: 480px;
+            max-width: 900px;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        header {
             width: 100%;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 32px;
+            margin-bottom: 12px;
+        }
+        .logo {
+            font-family: 'Baloo 2', 'Noto Sans TC', cursive;
+            font-size: 2.1em;
+            color: var(--main-orange);
+            letter-spacing: 2px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            user-select: none;
+        }
+        .logo-icon {
+            font-size: 1.2em;
+            color: var(--main-blue);
+        }
+        .header-btns {
+            display: flex;
+            gap: 10px;
+        }
+        .icon-btn {
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            color: var(--main-blue);
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+        .icon-btn:hover {
+            background: #e3e6f3;
         }
         .role-select {
-            margin-top: 80px;
-            background: #fff;
+            margin-top: 40px;
+            background: var(--card-bg);
             border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.08);
+            box-shadow: var(--shadow);
             padding: 40px 20px 32px 20px;
+            animation: fadeIn 0.7s;
         }
         .role-btn {
             padding: 16px 36px;
@@ -33,13 +84,15 @@
             border: none;
             border-radius: 25px;
             margin: 18px 18px 0 18px;
-            background: #1976d2;
+            background: var(--main-orange);
             color: #fff;
             cursor: pointer;
             transition: all 0.2s;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(255,152,0,0.08);
         }
         .role-btn:hover {
-            background: #125ea8;
+            background: #fb8c00;
         }
         .switch-role-btn {
             position: absolute;
@@ -49,37 +102,93 @@
             font-size: 1em;
             border: none;
             border-radius: 18px;
-            background: #f7faff;
-            color: #1976d2;
+            background: #fff3e0;
+            color: var(--main-orange);
             cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 4px rgba(255,152,0,0.08);
+            font-weight: bold;
         }
         .switch-role-btn:hover {
-            background: #e3f2fd;
+            background: #ffe0b2;
         }
         .main-section {
-            background: #fff;
+            background: var(--card-bg);
             border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.08);
+            box-shadow: var(--shadow);
             padding: 36px 20px 32px 20px;
-            margin-top: 48px;
+            margin-top: 32px;
+            animation: fadeIn 0.7s;
         }
         .main-title {
             font-size: 1.5em;
             font-weight: bold;
-            color: #1976d2;
+            color: var(--main-blue);
             margin-bottom: 18px;
         }
-        .main-card {
-            min-width: 180px;
-            background: #f7faff;
-            border-radius: 10px;
-            padding: 18px 12px;
-            font-size: 1.3em;
-            color: #1976d2;
+        .score-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .score-input {
+            padding: 8px 14px;
+            font-size: 1.1em;
+            border: 1.5px solid #ffe0b2;
+            border-radius: 16px;
+            outline: none;
+            margin-right: 6px;
+        }
+        .score-btn {
+            padding: 8px 18px;
+            font-size: 1.05em;
+            border: none;
+            border-radius: 16px;
+            background: var(--main-blue);
+            color: #fff;
             font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
-            margin-bottom: 18px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .score-btn:hover {
+            background: #3949ab;
+        }
+        .guesser-flex3 {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+        .guesser-col {
+            flex: 1 1 0;
+            min-width: 0;
+        }
+        .hint-list-title, .used-list-title, .scoreboard-title {
+            font-size: 1.1em;
+            color: #888;
+            margin: 0 0 8px 0;
+            font-weight: bold;
+        }
+        .hint-btns-col {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 10px;
+            justify-content: flex-start;
+        }
+        .used-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .used-item {
+            background: #e3f2fd;
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: var(--main-blue);
+            font-size: 1em;
+            margin: 0;
         }
         .button {
             padding: 10px 22px;
@@ -87,38 +196,16 @@
             border: none;
             border-radius: 20px;
             cursor: pointer;
-            background: #1976d2;
+            background: var(--main-orange);
             color: #fff;
             transition: all 0.2s;
-            margin: 6px 6px 12px 6px;
+            margin: 0;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(255,152,0,0.08);
+            white-space: nowrap;
         }
         .button:hover {
-            background: #125ea8;
-        }
-        .used-list-title {
-            font-size: 1.1em;
-            color: #888;
-            margin: 18px 0 8px 0;
-        }
-        .used-list {
-            text-align: left;
-            margin: 0 auto;
-            max-width: 320px;
-        }
-        .used-item {
-            background: #e3f2fd;
-            border-radius: 8px;
-            padding: 8px 12px;
-            margin: 6px 0;
-            color: #1976d2;
-            font-size: 1em;
-        }
-        .hint-btns {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 18px;
+            background: #fb8c00;
         }
         .limit-msg {
             color: #d32f2f;
@@ -126,30 +213,180 @@
             margin: 12px 0 0 0;
             font-weight: bold;
         }
+        .scoreboard {
+            background: #fffde7;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(255,152,0,0.08);
+            padding: 18px 12px 12px 12px;
+            width: 100%;
+            max-width: 220px;
+            min-width: 120px;
+        }
+        .scoreboard-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .scoreboard-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            border-bottom: 1px solid #ffe0b2;
+            font-size: 1.08em;
+        }
+        .scoreboard-list li:last-child {
+            border-bottom: none;
+        }
+        .reset-score-btn {
+            margin-top: 10px;
+            background: #d32f2f;
+            color: #fff;
+            border: none;
+            border-radius: 16px;
+            padding: 7px 18px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .reset-score-btn:hover {
+            background: #b71c1c;
+        }
+        .modal-bg {
+            position: fixed;
+            left: 0; top: 0; right: 0; bottom: 0;
+            background: rgba(26,35,126,0.18);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s;
+        }
+        .modal {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 32px 24px 24px 24px;
+            max-width: 350px;
+            text-align: left;
+            position: relative;
+            animation: pop 0.3s;
+        }
+        .modal h2 {
+            color: var(--main-orange);
+            font-size: 1.3em;
+            margin-top: 0;
+        }
+        .modal-close {
+            position: absolute;
+            right: 16px;
+            top: 12px;
+            font-size: 1.3em;
+            background: none;
+            border: none;
+            color: #888;
+            cursor: pointer;
+        }
+        .modal-close:hover {
+            color: var(--main-orange);
+        }
+        footer {
+            margin: 40px 0 10px 0;
+            color: #888;
+            font-size: 1em;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+        @media (max-width: 1100px) {
+            .container { max-width: 99vw; }
+        }
+        @media (max-width: 900px) {
+            .guesser-flex3 { flex-direction: column; gap: 18px; }
+            .scoreboard { max-width: 100%; min-width: 0; }
+        }
+        @media (max-width: 600px) {
+            .container { max-width: 98vw; }
+            .main-section, .role-select { padding: 18px 4vw 18px 4vw; }
+            header { margin-top: 18px; }
+            .hint-btns-col, .used-list { gap: 6px; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: none; }
+        }
+        @keyframes pop {
+            0% { transform: scale(0.7); opacity: 0; }
+            80% { transform: scale(1.08); }
+            100% { transform: scale(1); opacity: 1; }
+        }
     </style>
 </head>
 <body>
-    <button class="switch-role-btn" id="switchRoleBtn" style="display:none;">切換角色</button>
     <div class="container">
+        <header>
+            <div class="logo"><span class="logo-icon">🗣️</span>侃侃而猜</div>
+            <div class="header-btns">
+                <button class="icon-btn" id="infoBtn" title="玩法說明">❓</button>
+                <button class="switch-role-btn" id="switchRoleBtn" style="display:none;">切換角色</button>
+            </div>
+        </header>
         <div id="roleSelect" class="role-select">
-            <h1>侃侃而猜</h1>
-            <div style="margin-bottom:18px;">請選擇你的角色</div>
+            <div style="font-size:1.3em;font-weight:bold;margin-bottom:18px;">請選擇你的角色</div>
             <button class="role-btn" id="roleGuesser">我是猜題者</button>
             <button class="role-btn" id="roleGiver">我是提示者</button>
         </div>
         <div id="guesserSection" class="main-section" style="display:none;">
             <div class="main-title">猜題者</div>
-            <div class="hint-btns" id="hintBtns"></div>
+            <div class="score-row">
+                <input class="score-input" id="guesserName" type="text" placeholder="請輸入猜題者姓名" maxlength="12" autocomplete="off">
+                <button class="score-btn" id="scoreBtn">猜對了</button>
+            </div>
+            <div class="guesser-flex3">
+                <div class="guesser-col">
+                    <div class="used-list-title">已問過的助攻問題：</div>
+                    <div class="used-list" id="usedHintsList"></div>
+                </div>
+                <div class="guesser-col">
+                    <div class="hint-list-title">待選助攻問題：</div>
+                    <div class="hint-btns-col" id="hintBtns"></div>
+                </div>
+                <div class="guesser-col">
+                    <div class="scoreboard-title">排行榜</div>
+                    <div class="scoreboard" id="scoreboard">
+                        <ul class="scoreboard-list" id="scoreboardList"></ul>
+                        <button class="reset-score-btn" id="resetScoreBtn">重置分數</button>
+                    </div>
+                </div>
+            </div>
             <div class="limit-msg" id="limitMsg" style="display:none;">已達 5 題，請重新開始！</div>
             <button class="button" id="resetGuesserBtn" style="display:none;">重新開始</button>
-            <div class="used-list-title">已問過的助攻問題：</div>
-            <div class="used-list" id="usedHintsList"></div>
         </div>
         <div id="giverSection" class="main-section" style="display:none;">
             <div class="main-title">提示者</div>
             <div class="main-card" id="giverTopic">—</div>
             <button class="button" id="drawTopicBtn">抽主題</button>
         </div>
+        <div id="modalBg" class="modal-bg" style="display:none;">
+            <div class="modal">
+                <button class="modal-close" id="closeModalBtn">✕</button>
+                <h2>玩法說明</h2>
+                <ol style="padding-left:18px;">
+                    <li>進入網頁後，選擇你的角色（猜題者/提示者）。</li>
+                    <li>提示者按「抽主題」獲得題目，不能讓猜題者看到。</li>
+                    <li>猜題者可從助攻問題中自由選擇，詢問提示者。</li>
+                    <li>每輪最多可問 5 題，問滿後請按「重新開始」進行新一輪。</li>
+                    <li>猜對時請輸入姓名並按「猜對了」，系統自動計分。</li>
+                    <li>可隨時切換角色，體驗不同視角。</li>
+                </ol>
+                <div style="margin-top:10px;font-size:0.98em;color:#888;">本遊戲由 Helen 製作，歡迎自由分享！</div>
+            </div>
+        </div>
+        <footer>
+            作者：Helen<br>
+            <!-- email: <a href="mailto:"></a> -->
+            2024 &copy; Talk n Guess
+        </footer>
     </div>
     <script src="script.js"></script>
 </body>

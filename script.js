@@ -151,10 +151,13 @@ const hints = [
     { category: "18禁", hint: "你最想寫小說的是哪一次？" }
 ];
 
+const CUSTOM_HINT = '自訂問題';
+
 let currentRole = null; // 'guesser' or 'giver'
 let usedHintIndexes = [];
 let usedTopicIndexes = [];
 let currentTopic = null;
+let scoreboard = {}; // { name: 分數 }
 
 function getRandomUnusedTopicIndex() {
     if (usedTopicIndexes.length >= topics.length) return null;
@@ -173,10 +176,11 @@ function switchRole(role) {
     document.getElementById('switchRoleBtn').style.display = '';
     updateGuesserUI();
     updateGiverUI();
+    showToast(role === 'guesser' ? '你現在是猜題者' : '你現在是提示者');
 }
 
 function updateGuesserUI() {
-    // 助攻問題按鈕
+    // 助攻問題按鈕（待選）
     const btnsDiv = document.getElementById('hintBtns');
     btnsDiv.innerHTML = '';
     const limitMsg = document.getElementById('limitMsg');
@@ -187,13 +191,21 @@ function updateGuesserUI() {
     } else {
         limitMsg.style.display = 'none';
         resetBtn.style.display = 'none';
+        // 先加自訂問題按鈕（可重複）
+        const customBtn = document.createElement('button');
+        customBtn.className = 'button';
+        customBtn.textContent = CUSTOM_HINT;
+        customBtn.onclick = () => selectCustomHint(customBtn);
+        btnsDiv.appendChild(customBtn);
+        // 其他助攻問題
         hints.forEach((item, idx) => {
+            if (item.hint === CUSTOM_HINT) return; // 避免重複
             // 已問過的不再顯示
             if (usedHintIndexes.includes(idx)) return;
             const btn = document.createElement('button');
             btn.className = 'button';
             btn.textContent = item.hint;
-            btn.onclick = () => selectHint(idx);
+            btn.onclick = () => selectHint(idx, btn);
             btnsDiv.appendChild(btn);
         });
     }
@@ -206,38 +218,136 @@ function updateGuesserUI() {
         div.textContent = hints[idx].hint;
         usedList.appendChild(div);
     });
+    updateScoreboardUI();
+}
+
+function updateScoreboardUI() {
+    const list = document.getElementById('scoreboardList');
+    list.innerHTML = '';
+    // 排序：分數高到低
+    const sorted = Object.entries(scoreboard).sort((a, b) => b[1] - a[1]);
+    sorted.forEach(([name, score]) => {
+        const li = document.createElement('li');
+        li.innerHTML = `<span>${name}</span><span>${score} 分</span>`;
+        list.appendChild(li);
+    });
 }
 
 function updateGiverUI() {
     const topicDiv = document.getElementById('giverTopic');
     if (currentTopic) {
         topicDiv.textContent = currentTopic.topic;
+        topicDiv.classList.add('animated');
+        setTimeout(() => topicDiv.classList.remove('animated'), 400);
     } else {
         topicDiv.textContent = '—';
     }
 }
 
-function selectHint(idx) {
+function selectHint(idx, btn) {
     if (!usedHintIndexes.includes(idx) && usedHintIndexes.length < 5) {
         usedHintIndexes.push(idx);
         updateGuesserUI();
+        if (btn) {
+            btn.classList.add('animated');
+            setTimeout(() => btn.classList.remove('animated'), 400);
+        }
+        showToast('已選擇助攻問題');
     }
+}
+
+function selectCustomHint(btn) {
+    showToast('請口頭說出自訂問題！');
+    if (btn) {
+        btn.classList.add('animated');
+        setTimeout(() => btn.classList.remove('animated'), 400);
+    }
+    // 不會被移到已問過區塊，可重複點選
 }
 
 function drawTopic() {
     const idx = getRandomUnusedTopicIndex();
     if (idx === null) {
-        alert('所有主題都已用完！');
+        showToast('所有主題都已用完！', true);
         return;
     }
     usedTopicIndexes.push(idx);
     currentTopic = topics[idx];
     updateGiverUI();
+    showToast('已抽出新主題');
 }
 
 function resetGuesser() {
     usedHintIndexes = [];
     updateGuesserUI();
+    showToast('已重新開始');
+}
+
+function scoreThisRound() {
+    const nameInput = document.getElementById('guesserName');
+    const name = nameInput.value.trim();
+    if (!name) {
+        showToast('請輸入猜題者姓名', true);
+        nameInput.focus();
+        return;
+    }
+    // 計算本輪有效題數（不含自訂問題）
+    let validCount = usedHintIndexes.length;
+    if (validCount === 0) {
+        showToast('請至少問一題再計分', true);
+        return;
+    }
+    let score = 6 - validCount;
+    if (score < 1) score = 1;
+    if (!scoreboard[name]) scoreboard[name] = 0;
+    scoreboard[name] += score;
+    showToast(`${name} 本輪獲得 ${score} 分！`);
+    updateScoreboardUI();
+    // 自動重置本輪
+    setTimeout(() => {
+        resetGuesser();
+        nameInput.value = '';
+    }, 800);
+}
+
+function resetScoreboard() {
+    scoreboard = {};
+    updateScoreboardUI();
+    showToast('分數已重置');
+}
+
+// 玩法說明彈窗
+function showModal() {
+    document.getElementById('modalBg').style.display = '';
+}
+function hideModal() {
+    document.getElementById('modalBg').style.display = 'none';
+}
+
+// Toast 操作提示
+function showToast(msg, isError) {
+    let toast = document.getElementById('toastMsg');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toastMsg';
+        toast.style.position = 'fixed';
+        toast.style.bottom = '38px';
+        toast.style.left = '50%';
+        toast.style.transform = 'translateX(-50%)';
+        toast.style.background = isError ? '#d32f2f' : 'var(--main-orange)';
+        toast.style.color = '#fff';
+        toast.style.padding = '12px 28px';
+        toast.style.borderRadius = '24px';
+        toast.style.fontSize = '1.1em';
+        toast.style.boxShadow = '0 2px 8px rgba(0,0,0,0.10)';
+        toast.style.zIndex = 2000;
+        toast.style.opacity = 0;
+        toast.style.transition = 'opacity 0.3s';
+        document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.style.opacity = 1;
+    setTimeout(() => { toast.style.opacity = 0; }, 1800);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -252,9 +362,20 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('drawTopicBtn').onclick = drawTopic;
     // 猜題者重新開始
     document.getElementById('resetGuesserBtn').onclick = resetGuesser;
+    // 猜對了計分
+    document.getElementById('scoreBtn').onclick = scoreThisRound;
+    // 重置分數
+    document.getElementById('resetScoreBtn').onclick = resetScoreboard;
+    // 玩法說明彈窗
+    document.getElementById('infoBtn').onclick = showModal;
+    document.getElementById('closeModalBtn').onclick = hideModal;
+    document.getElementById('modalBg').onclick = function(e) {
+        if (e.target === this) hideModal();
+    };
     // 預設顯示角色選擇
     document.getElementById('roleSelect').style.display = '';
     document.getElementById('guesserSection').style.display = 'none';
     document.getElementById('giverSection').style.display = 'none';
     document.getElementById('switchRoleBtn').style.display = 'none';
+    updateScoreboardUI();
 }); 
